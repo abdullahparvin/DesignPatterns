@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.util.Random;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class TextFile {
 
@@ -18,8 +21,9 @@ public class TextFile {
         fileContent = data;
     }
 
-    public void printFormatted() {
+    public void printFormatted() throws IOException {
         format.format(fileContent);
     }
+
 
 }
