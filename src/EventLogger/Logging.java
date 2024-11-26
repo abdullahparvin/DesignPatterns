@@ -6,6 +6,17 @@ public class Logging {
     public static void main(String[] args) {
 
         Logger logger = Logger.getInstance();
+
+        int option = 0;
+        switch (option) {
+            case 0 -> {
+                System.out.println("logging to file");
+                logger.setUpFile("logs.txt");
+            }
+            case 1 -> System.out.println("logging to remote server");
+            default -> System.out.println("logging to console only");
+        }
+
         logger.log("INFO", "Running");
         logger.log("ERROR", "Syntax");
         
@@ -14,5 +25,7 @@ public class Logging {
         for (String entry: history) {
             System.out.println(entry);
         }
+
+        logger.archive("archivedLogs.txt");
     }
 }
