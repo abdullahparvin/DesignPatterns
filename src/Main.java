@@ -1,7 +1,8 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         ArrayList<String> data = new ArrayList<>();
         data.add("We will implement this by using the strategy design pattern. This will make the application " +
@@ -12,7 +13,7 @@ public class Main {
                 "and view their content in the selected format before publishing or saving it.");
 
         TextFile file = new TextFile(data);
-        int option = 0;
+        int option = 4;
         switch (option) {
             case 0:
                 file.setFormat(new PlainTextFormat());
@@ -22,6 +23,12 @@ public class Main {
                 break;
             case 2:
                 file.setFormat(new MarkdownFormat());
+                break;
+            case 3:
+                file.setFormat(new JsonFormat());
+                break;
+            case 4:
+                file.setFormat(new XmlFormat());
                 break;
             default:
                 file.setFormat(new PlainTextFormat());
