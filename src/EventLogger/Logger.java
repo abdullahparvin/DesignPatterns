@@ -21,4 +21,9 @@ public class Logger {
         System.out.println("Returning instance of Logger");
         return uniqueInstance;
     }
+
+    public void log(String severityLevel, String message) {
+        String timestamp = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss").format(new Date());
+        System.out.println(timestamp + ", " + severityLevel + ": " + message);
+    }
 }
