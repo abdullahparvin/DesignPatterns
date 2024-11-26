@@ -1,11 +1,14 @@
 package EventLogger;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class Logger {
 
     private static Logger uniqueInstance;
+    private final List<String> history = new ArrayList<>();
 
     private Logger() {}
 
@@ -24,6 +27,12 @@ public class Logger {
 
     public void log(String severityLevel, String message) {
         String timestamp = new SimpleDateFormat("MM-dd-yyyy HH:mm:ss").format(new Date());
-        System.out.println(timestamp + ", " + severityLevel + ": " + message);
+        String logged = (timestamp + ", " + severityLevel + ": " + message);
+        System.out.println(logged);
+        history.add(logged);
+    }
+
+    public List<String> getLogHistory() {
+        return history;
     }
 }
