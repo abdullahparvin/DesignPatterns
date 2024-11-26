@@ -1,5 +1,7 @@
 package EventLogger;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,6 +11,8 @@ public class Logger {
 
     private static Logger uniqueInstance;
     private final List<String> history = new ArrayList<>();
+
+    private FileWriter fileWriter;
 
     private Logger() {}
 
@@ -30,9 +34,40 @@ public class Logger {
         String logged = (timestamp + ", " + severityLevel + ": " + message);
         System.out.println(logged);
         history.add(logged);
+
+        if (fileWriter != null) {
+
+            try {
+                fileWriter.write(logged + "\n");
+                fileWriter.flush();
+
+            } catch (IOException e) {
+                System.err.println("Error: " + e.getMessage());
+            }
+        }
     }
 
     public List<String> getLogHistory() {
         return history;
+    }
+
+    public void setUpFile(String loggerFile) {
+        try {
+            fileWriter = new FileWriter(loggerFile, true);
+        } catch (IOException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+    }
+
+    public void archive(String archiveFile) {
+        try (FileWriter writer = new FileWriter(archiveFile)) {
+            for (String entry : history) {
+                writer.write(entry + "\n");
+            }
+            history.clear();
+            System.out.println("Logs have been successfully archived");
+        } catch (IOException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
     }
 }
