@@ -15,6 +15,6 @@ public abstract class Notification {
     }
 
     void addToHistory(String message) {
-        history.add(message);
+        history.add(message + '\n');
     }
 }
