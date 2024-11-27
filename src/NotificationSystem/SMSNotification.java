@@ -5,8 +5,15 @@ public class SMSNotification extends NotificationDecorator {
         super(notification);
     }
 
+    @Override
     public void notify(String message) {
         super.notify(message);
-        System.out.println("SMS Notification: " + message);
+        SMSNotify(message);
+    }
+
+    private void SMSNotify(String message) {
+        String SMSMessage = "SMS Notification: " + message;
+        System.out.println(SMSMessage);
+        addToHistory(SMSMessage);
     }
 }
